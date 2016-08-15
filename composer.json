@@ -1,0 +1,13 @@
+{
+    "name": "cseufert/iso3166php",
+    "description": "ISO3166 Country and Subdivision Data with PHP API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Seufert",
+            "email": "chris@seufert.id.au"
+        }
+    ],
+    "require": {}
+}
