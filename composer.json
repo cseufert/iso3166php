@@ -1,13 +1,32 @@
 {
-    "name": "cseufert/iso3166php",
-    "description": "ISO3166 Country and Subdivision Data with PHP API",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Chris Seufert",
-            "email": "chris@seufert.id.au"
-        }
-    ],
-    "require": {}
+  "name": "cseufert/iso3166php",
+  "description": "ISO3166 Country and Subdivision Data with PHP API",
+  "type": "library",
+  "keywords": [
+    "ISO3166",
+    "country",
+    "state",
+    "province",
+    "territory",
+    "country code"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chris Seufert",
+      "email": "chris@seufert.id.au",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Seufert\\ISO3166\\": "php/"
+    }
+  }
 }
