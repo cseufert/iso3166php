@@ -1,7 +1,7 @@
 <?php
-require_once "../php/NotFoundEx.php";
-require_once "../php/Country.php";
-require_once "../php/Store.php";
+require_once __DIR__."/../php/NotFoundEx.php";
+require_once __DIR__."/../php/Country.php";
+require_once __DIR__."/../php/Store.php";
 
 /**
  * Class BasicTest
