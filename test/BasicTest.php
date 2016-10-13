@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__."/../php/NotFoundEx.php";
 require_once __DIR__."/../php/Country.php";
+require_once __DIR__."/../php/SubDivision.php";
 require_once __DIR__."/../php/Store.php";
 
 /**
@@ -30,6 +31,18 @@ class BasicTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals("64",$aus->phonePrefix);
     $states = $store->getAllStates($aus);
     $this->assertEquals(17,count($states));
+  }
+
+  public function testSubDivFound() {
+    $store = new Seufert\ISO3166\Store();
+    $aus = $store->countryByID("AU");
+    $vic = $store->subDivByID($aus, "VIC");
+    $this->assertEquals("Victoria", $vic->name);
+    $this->assertEquals("VIC", $vic->code);
+    $usa = $store->countryByID("US");
+    $ca = $store->subDivByID($usa, "CA");
+    $this->assertEquals("California", $ca->name);
+    $this->assertEquals("CA", $ca->code);
   }
 
   /**
