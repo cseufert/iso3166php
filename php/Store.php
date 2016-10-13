@@ -72,7 +72,7 @@ class Store {
    * @throws \Exception
    */
   function subDivByID(Country $country, $code) {
-    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' AND divcode='{$code}'");
+    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' AND divcode='{$code}' and type!='Outlying area'");
     $row = $r->fetchArray(SQLITE3_ASSOC);
     if(!$row) throw new \Exception("SubDivision could not be found ({$country->code}-{$code})");
     return new SubDivision($country, $row['divcode'], $row['divname']);
