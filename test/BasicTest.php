@@ -45,6 +45,17 @@ class BasicTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals("CA", $ca->code);
   }
 
+  public function testSubDivList() {
+    $store = new Seufert\ISO3166\Store();
+    $aus = $store->countryByID("AU");
+    $auStates = $store->subDivByCountry($aus);
+    $this->assertEquals(8,count($auStates));
+    $us = $store->countryByID("US");
+    $usStates = $store->subDivByCountry($us);
+    var_dump($usStates);
+    $this->assertEquals(51,count($usStates));
+  }
+
   /**
    * @throws \Seufert\ISO3166\NotFoundEx
    * @expectedException Seufert\ISO3166\NotFoundEx

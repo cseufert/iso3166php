@@ -57,7 +57,7 @@ class Store {
    */
   function subDivByCountry(Country $country) {
     $out = [];
-    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}'");
+    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' and type!='Outlying area'");
     while($row = $r->fetchArray(SQLITE3_ASSOC)) {
       $out[] = new SubDivision($country, $row['divcode'], $row['divname']);
     }
@@ -72,7 +72,7 @@ class Store {
    * @throws \Exception
    */
   function subDivByID(Country $country, $code) {
-    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' AND divcode='{$code}' and type!='Outlying area'");
+    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' AND divcode='{$code}'");
     $row = $r->fetchArray(SQLITE3_ASSOC);
     if(!$row) throw new \Exception("SubDivision could not be found ({$country->code}-{$code})");
     return new SubDivision($country, $row['divcode'], $row['divname']);
