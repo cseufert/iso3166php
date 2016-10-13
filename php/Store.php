@@ -51,6 +51,34 @@ class Store {
   }
 
   /**
+   * List all subdivisions in country
+   * @param Country $country
+   * @return SubDivision[] List of Subdivisions that match country
+   */
+  function subdivByCountry(Country $country) {
+    $out = [];
+    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}'");
+    while($row = $r->fetchArray(SQLITE_ASSOC)) {
+      $out[] = new SubDivision($country, $row['divcode'], $row['divname']);
+    }
+    return $out;
+  }
+
+  /**
+   * Get one subdivision by code (Exception on not found)
+   * @param Country $country
+   * @param $code Country SubDivision (state) code, eg VIC for Victoria Australia, or LA for Los Angeles, USA
+   * @return SubDivision
+   * @throws \Exception
+   */
+  function SubDivByID(Country $country, $code) {
+    $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' AND divname='{$code}'");
+    $row = $r->fetchArray(SQLITE_ASSOC);
+    if(!$row) throw new \Exception("SubDivision could not be found");
+    return new SubDivision($country, $row['divcode'], $row['divname']);
+  }
+
+  /**
    * Return all stats for Country
    * @param Country $country
    * @return array Assoc Array [ID] => State Name
