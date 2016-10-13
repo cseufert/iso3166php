@@ -55,7 +55,7 @@ class Store {
    * @param Country $country
    * @return SubDivision[] List of Subdivisions that match country
    */
-  function subdivByCountry(Country $country) {
+  function subDivByCountry(Country $country) {
     $out = [];
     $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}'");
     while($row = $r->fetchArray(SQLITE_ASSOC)) {
@@ -71,7 +71,7 @@ class Store {
    * @return SubDivision
    * @throws \Exception
    */
-  function SubDivByID(Country $country, $code) {
+  function subDivByID(Country $country, $code) {
     $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' AND divname='{$code}'");
     $row = $r->fetchArray(SQLITE_ASSOC);
     if(!$row) throw new \Exception("SubDivision could not be found");
