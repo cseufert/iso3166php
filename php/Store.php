@@ -25,7 +25,7 @@ class Store {
     $row = $this->db->querySingle("SELECT CommonName as name, ISO4217CurrencyCode as currency, \"ITU-TTelephoneCode\" as phonePrefix, \"ISO3166-12LetterCode\" as code FROM country ".
       "WHERE \"ISO3166-12LetterCode\" = '$code' AND Type = 'Independent State'", true);
     if(!$row)
-      throw new NotFoundEx("Not Found");
+      throw new NotFoundEx("Country with code $code could not be found");
     $o = new Country();
     foreach(['name', 'currency','code','phonePrefix'] as $k)
       $o->$k = $row[$k];
@@ -69,12 +69,12 @@ class Store {
    * @param Country $country
    * @param $code Country SubDivision (state) code, eg VIC for Victoria Australia, or CA for California, USA
    * @return SubDivision
-   * @throws \Exception
+   * @throws NotFoundEx
    */
   function subDivByID(Country $country, $code) {
     $r = $this->db->query("SELECT divcode, divname FROM country_state WHERE country = '{$country->code}' AND divcode='{$code}'");
     $row = $r->fetchArray(SQLITE3_ASSOC);
-    if(!$row) throw new \Exception("SubDivision could not be found ({$country->code}-{$code})");
+    if(!$row) throw new NotFoundEx("SubDivision could not be found ({$country->code}-{$code})");
     return new SubDivision($country, $row['divcode'], $row['divname']);
   }
 
