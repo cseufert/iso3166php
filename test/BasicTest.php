@@ -52,7 +52,6 @@ class BasicTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(8,count($auStates));
     $us = $store->countryByID("US");
     $usStates = $store->subDivByCountry($us);
-    var_dump($usStates);
     $this->assertEquals(51,count($usStates));
   }
 
@@ -65,6 +64,16 @@ class BasicTest extends PHPUnit_Framework_TestCase {
     $notfound = $store->countryByID("ZZ");
   }
   
+  /**
+   * @throws \Seufert\ISO3166\NotFoundEx
+   * @expectedException Seufert\ISO3166\NotFoundEx
+   */
+  public function testNotFoundSubDiv() {
+    $store = new Seufert\ISO3166\Store();
+    $au = $store->countryByID("AU");
+    $zzz = $store->subDivByID($au,'ZZZ');
+  }
+
   public function testList() {
     $store = new Seufert\ISO3166\Store();
     $list = $store->listByCode(['AU','NZ','GB','US']);
