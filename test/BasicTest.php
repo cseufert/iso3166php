@@ -9,7 +9,7 @@ require_once __DIR__."/../php/Store.php";
  * @package ${NAMESPACE}
  * @author Chris Seufert <chris@modd.com.au>
  */
-class BasicTest extends PHPUnit_Framework_TestCase {
+class BasicTest extends \PHPUnit\Framework\TestCase {
 
   public function testFound() {
     $store = new Seufert\ISO3166\Store();
@@ -57,19 +57,21 @@ class BasicTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @throws \Seufert\ISO3166\NotFoundEx
-   * @expectedException Seufert\ISO3166\NotFoundEx
+   *
    */
   public function testNotFound() {
-    $store = new Seufert\ISO3166\Store();
+      $this->expectException(Seufert\ISO3166\NotFoundEx::class);
+      $store = new Seufert\ISO3166\Store();
     $notfound = $store->countryByID("ZZ");
   }
   
   /**
    * @throws \Seufert\ISO3166\NotFoundEx
-   * @expectedException Seufert\ISO3166\NotFoundEx
+   *
    */
   public function testNotFoundSubDiv() {
-    $store = new Seufert\ISO3166\Store();
+      $this->expectException(Seufert\ISO3166\NotFoundEx::class);
+      $store = new Seufert\ISO3166\Store();
     $au = $store->countryByID("AU");
     $zzz = $store->subDivByID($au,'ZZZ');
   }
