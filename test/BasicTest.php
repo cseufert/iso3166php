@@ -76,11 +76,18 @@ class BasicTest extends \PHPUnit\Framework\TestCase {
     $zzz = $store->subDivByID($au,'ZZZ');
   }
 
-  public function testList() {
-    $store = new Seufert\ISO3166\Store();
-    $list = $store->listByCode(['AU','NZ','GB','US']);
-    $this->assertEquals(4,count($list));
+  public function testlist() {
+    $store = new seufert\iso3166\store();
+    $list = $store->listbycode(['au','nz','gb','us']);
+    $this->assertequals(4,count($list));
 
   }
+
+    public function testTaiwan() {
+        $store = new Seufert\ISO3166\Store();
+        $list = $store->listByCode(['TW']);
+        $this->assertEquals(1,count($list));
+        $this->assertEquals('Taiwan', $list[0]->name);
+    }
 
 }
