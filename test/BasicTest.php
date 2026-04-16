@@ -78,7 +78,7 @@ class BasicTest extends \PHPUnit\Framework\TestCase {
 
   public function testlist() {
     $store = new seufert\iso3166\store();
-    $list = $store->listbycode(['au','nz','gb','us']);
+    $list = $store->listbycode(['AU','NZ','GB','US']);
     $this->assertequals(4,count($list));
 
   }
@@ -88,6 +88,13 @@ class BasicTest extends \PHPUnit\Framework\TestCase {
         $list = $store->listByCode(['TW']);
         $this->assertEquals(1,count($list));
         $this->assertEquals('Taiwan', $list[0]->name);
+    }
+
+    public function testHongKong() {
+        $store = new Seufert\ISO3166\Store();
+        $list = $store->listByCode(['HK']);
+        $this->assertEquals(1,count($list));
+        $this->assertEquals('Hong Kong', $list[0]->name);
     }
 
 }
